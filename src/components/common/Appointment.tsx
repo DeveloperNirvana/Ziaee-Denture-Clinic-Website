@@ -1,10 +1,12 @@
 'use client';
-import { useRef } from 'react';
+import { FormEvent, useRef, useState } from 'react';
 import Image from 'next/image';
 import { motion, useScroll, useTransform } from 'motion/react';
 import { FaChevronDown } from 'react-icons/fa6';
 import Container from './Container';
 import Button from './Button';
+
+const FORMCARRY_URL = 'https://formcarry.com/s/AdPUAxQ_1cB';
 const className =
   'h-12.5 text-sm rounded-4xl w-full border border-white/0 duration-500 bg-white-blue/50 px-6 text-white-blue outline-none placeholder:text-white-blue/70 focus:border-white';
 const appointmentData = {
@@ -41,6 +43,45 @@ export default function Appointment() {
     offset: ['start end', 'end start']
   });
   const y = useTransform(scrollYProgress, [0, 1], [-150, 150]);
+
+  const [fullName, setFullName] = useState('');
+  const [phone, setPhone] = useState('');
+  const [email, setEmail] = useState('');
+  const [service, setService] = useState('');
+  const [message, setMessage] = useState('');
+  const [status, setStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle');
+  const [error, setError] = useState('');
+
+  async function onSubmit(e: FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    setStatus('submitting');
+    setError('');
+    try {
+      const response = await fetch(FORMCARRY_URL, {
+        method: 'POST',
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ fullName, phone, email, service, message })
+      });
+      const result = await response.json();
+      if (result.code === 200) {
+        setStatus('success');
+        setFullName('');
+        setPhone('');
+        setEmail('');
+        setService('');
+        setMessage('');
+      } else {
+        setStatus('error');
+        setError(result.message || 'Something went wrong. Please try again.');
+      }
+    } catch (err) {
+      setStatus('error');
+      setError(err instanceof Error ? err.message : 'Something went wrong. Please try again.');
+    }
+  }
   return (
     <section ref={sectionRef} className="relative overflow-hidden py-16 lg:py-32">
       <motion.div style={{ y }} className="absolute inset-0 scale-115">
@@ -56,14 +97,35 @@ export default function Appointment() {
             <div>
               <p className="text-white-blue text-sm text-center lg:text-left">{appointmentData.description}</p>
             </div>
-            <form className="space-y-4">
+            <form className="space-y-4" onSubmit={onSubmit}>
               <div className="grid gap-4 md:grid-cols-2">
-                <input type="text" placeholder={appointmentData.fields.fullName.placeholder} className={`${className} `} />
-                <input type="tel" placeholder={appointmentData.fields.phoneNumber.placeholder} className={`${className} `} />
+                <input
+                  type="text"
+                  required
+                  value={fullName}
+                  onChange={(e) => setFullName(e.target.value)}
+                  placeholder={appointmentData.fields.fullName.placeholder}
+                  className={`${className} `}
+                />
+                <input
+                  type="tel"
+                  required
+                  value={phone}
+                  onChange={(e) => setPhone(e.target.value)}
+                  placeholder={appointmentData.fields.phoneNumber.placeholder}
+                  className={`${className} `}
+                />
               </div>
-              <input type="email" placeholder={appointmentData.fields.email.placeholder} className={`${className} `} />
+              <input
+                type="email"
+                required
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                placeholder={appointmentData.fields.email.placeholder}
+                className={`${className} `}
+              />
               <div className="relative">
-                <select className={`appearance-none ${className} `}>
+                <select value={service} onChange={(e) => setService(e.target.value)} className={`appearance-none ${className} `}>
                   <option value="">{appointmentData.fields.service.placeholder}</option>
                   {appointmentData.fields.service.options.map((option) => (
                     <option key={option} value={option} className="text-secondary">
@@ -73,10 +135,35 @@ export default function Appointment() {
                 </select>
                 <FaChevronDown className="pointer-events-none absolute right-6 top-1/2 -translate-y-1/2 text-white" />
               </div>
-              <input type="text" placeholder={appointmentData.fields.message.placeholder} className={`${className}`} />
+              <input
+                type="text"
+                value={message}
+                onChange={(e) => setMessage(e.target.value)}
+                placeholder={appointmentData.fields.message.placeholder}
+                className={`${className}`}
+              />
+              {status === 'success' && (
+                <p className="text-sm text-white-blue" role="status">
+                  Thank you! We received your request and will contact you shortly.
+                </p>
+              )}
+              {status === 'error' && (
+                <p className="text-sm text-red-200" role="alert">
+                  {error}
+                </p>
+              )}
               <div className="flex justify-end xl:pt-10">
-                <Button type="submit" color="white" variant="solid" rounded="full" arrow arrowStyle="circle" className="pr-1">
-                  {appointmentData.submitButton.text}
+                <Button
+                  type="submit"
+                  color="white"
+                  variant="solid"
+                  rounded="full"
+                  arrow
+                  arrowStyle="circle"
+                  className="pr-1"
+                  disabled={status === 'submitting'}
+                >
+                  {status === 'submitting' ? 'Sending…' : appointmentData.submitButton.text}
                 </Button>
               </div>
             </form>

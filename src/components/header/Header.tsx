@@ -22,7 +22,7 @@ const contactItems = [
   },
   {
     icon: FaLocationDot,
-    text: '1234 Kingsway, Vancouver, BC'
+    text: '2677 Kingsway, Vancouver, BC'
   }
 ];
 const menuItems: MenuItem[] = [

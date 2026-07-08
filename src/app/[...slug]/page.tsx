@@ -1,5 +1,15 @@
+import type { Metadata } from 'next';
 import Container from '@/components/common/Container';
 import Heading from '@/components/common/Heading';
+
+// Placeholder pages — keep them out of search indexes until real content ships.
+export const metadata: Metadata = {
+  robots: {
+    index: false,
+    follow: false
+  }
+};
+
 type PageProps = {
   params: Promise<{
     slug: string[];

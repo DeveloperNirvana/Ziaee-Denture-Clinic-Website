@@ -19,7 +19,7 @@ const footerData = {
     title: 'CONTACT',
     phone: '604-326-0459',
     email: 'info@ziaeedenture.ca',
-    address: '1234 Kingsway, Vancouver, BC',
+    address: '2677 Kingsway, Vancouver, BC',
     hours: [
       {
         day: 'Mon – Fri',
