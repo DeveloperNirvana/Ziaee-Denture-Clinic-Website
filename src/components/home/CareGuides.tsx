@@ -28,9 +28,9 @@ interface CareGuidesProps {
 }
 export default function CareGuides({ data }: CareGuidesProps) {
   return (
-    <section className="py-14 xl:py-45">
+    <section className="space-py">
       <Container>
-        <div className="text-secondary leading-snug text-center mb-10 lg:mb-18">
+        <div className="text-secondary leading-snug text-center mb-10">
           <Tagline title={data.tagline} />
           <Heading className="text-white-blue mt-3 lg:mt-5" variant="xxl">
             <span className="text-secondary">{data.title.text} </span>

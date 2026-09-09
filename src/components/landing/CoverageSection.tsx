@@ -32,7 +32,7 @@ export default function CoverageSection({ data }: Props) {
           <div className="flex flex-col items-center lg:justify-between lg:items-start p-4 lg:p-6">
             <Tagline title={data.tag} className='xl:mt-15' />
             <div className="mt-3 max-w-2xl text-center lg:text-left">
-              <h2 className="mb-6 text-4xl leading-none text-secondary lg:text-[50px] uppercase mx-auto lg:mx-0">
+              <h2 className="mb-6 text-4xl leading-none text-secondary lg:text-[40px] xl:text-[42px] uppercase mx-auto lg:mx-0">
                 <span className="font-bold text-primary">{data.title.highlight}</span> {data.title.text}
               </h2>
               <p className="max-w-sm text-secondary mx-auto lg:mx-0">{data.description}</p>

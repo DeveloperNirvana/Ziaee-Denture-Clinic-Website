@@ -26,7 +26,7 @@ interface ServicesSectionProps {
 }
 export default function ServicesSection({ data }: ServicesSectionProps) {
   return (
-    <section className="py-14 lg:py-24 xl:pt-45 overflow-hidden">
+    <section className="space-py overflow-hidden">
       <Container>
         <div className="grid gap-3 lg:gap-10 lg:grid-cols-[400px_1fr] text-center lg:text-left">
           <div>
@@ -40,14 +40,14 @@ export default function ServicesSection({ data }: ServicesSectionProps) {
             <p className="max-w-130 leading-snug text-secondary mt-3 mx-auto lg:mx-0">{data.description}</p>
           </div>
         </div>
-        <div className="w-full mt-10 lg:mt-20">
+        <div className="w-full mt-10">
           <Swipers
             className="overflow-visible!"
             slidesPerView={1.2}
             spaceBetween={16}
             loop
             autoplay
-             speed={1600}
+            speed={1600}
             breakpoints={{
               768: {
                 slidesPerView: 2

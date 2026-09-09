@@ -1,307 +1,502 @@
 'use client';
 import Link from 'next/link';
+import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import { useState } from 'react';
-import Image from 'next/image';
-import { FaChevronDown, FaFacebookF, FaInstagram, FaTiktok } from 'react-icons/fa6';
+import {
+  FaChevronDown,
+  FaFacebookF,
+  FaInstagram,
+  FaLinkedinIn,
+} from 'react-icons/fa6';
 import { IoLocationSharp } from 'react-icons/io5';
 import Container from '../common/Container';
-const footerData = {
-  newsletter: {
-    title: 'Bringing light to every smile*',
-    description: 'Sign up to receive health tips.',
-    placeholder: 'Email address',
-    buttonText: 'Submit',
-    privacyText:
-      'By subscribing, you agree to our <strong>Privacy Policy</strong> and consent to receive updates from <strong>Ziaee Denture Clinic</strong>.'
-  },
-  contact: {
-    title: 'CONTACT',
-    phone: '604-326-0459',
-    email: 'info@ziaeedenture.ca',
-    address: '2677 Kingsway, Vancouver, BC',
-    hours: [
-      {
-        day: 'Mon – Fri',
-        time: '9:00 AM – 5:00 PM'
-      },
-      {
-        day: 'Saturday',
-        time: 'By appointment'
-      }
-    ]
-  },
-  services: {
-    title: 'SERVICES',
-    links: [
-      {
-        label: 'Complete Dentures',
-        href: '#'
-      },
-      {
-        label: 'Partial Dentures',
-        href: '#'
-      },
-      {
-        label: 'Denture Repairs',
-        href: '#'
-      },
-      {
-        label: 'Relines & Adjustments',
-        href: '#'
-      },
-      {
-        label: 'Digital Denture Design',
-        href: '#'
-      },
-      {
-        label: 'Custom Fit Assessment',
-        href: '#'
-      }
-    ]
-  },
-  support: {
-    title: 'SUPPORT',
-    links: [
-      {
-        label: 'Book an Appointment',
-        href: '#'
-      },
-      {
-        label: 'Request an Assessment',
-        href: '#'
-      },
-      {
-        label: 'CDCP Coverage',
-        href: '#'
-      },
-      {
-        label: 'New Patient Information',
-        href: '#'
-      },
-      {
-        label: 'Insurance Questions',
-        href: '#'
-      }
-    ]
-  },
-  socials: [
-    {
-      icon: 'instagram',
-      href: '#',
-      label: 'Instagram'
-    },
-    {
-      icon: 'tiktok',
-      href: '#',
-      label: 'TikTok'
-    },
-    {
-      icon: 'facebook',
-      href: '#',
-      label: 'Facebook'
-    },
-    {
-      icon: 'location',
-      href: '#',
-      label: 'Location'
-    }
-  ],
-  bottom: {
-    logo: 'ZIAEE',
-    copyright: '© 2026 Ziaee Denture Clinic',
-    credit: 'Designed & Developed by Nirvana Canada'
-  }
-};
+import { staticFooterData } from '@/data/footer';
+type FooterData = typeof staticFooterData;
+interface FooterProps {
+  data?: FooterData;
+}
 const socialIcons = {
   instagram: FaInstagram,
-  tiktok: FaTiktok,
   facebook: FaFacebookF,
-  location: IoLocationSharp
+  linkedin: FaLinkedinIn,
+  location: IoLocationSharp,
 };
-export default function Footer() {
+export default function Footer({ data }: FooterProps) {
+  const footer = data ?? staticFooterData;
+  const newsletter = footer.newsletter;
+  const contact = footer.contact;
+  const services = footer.services;
+  const support = footer.support;
+  const socials = footer.socials;
+  const bottom = footer.bottom;
   const pathname = usePathname();
   const [openItems, setOpenItems] = useState<number[]>([]);
+  /**
+   * Mobile accordion items
+   */
   const accordionItems = [
     {
-      title: footerData.contact.title,
-      type: 'contact'
+      title: contact.title,
+      type: 'contact',
     },
     {
-      title: footerData.services.title,
-      type: 'services'
+      title: services.title,
+      type: 'services',
     },
     {
-      title: footerData.support.title,
-      type: 'support'
-    }
-  ];
+      title: support.title,
+      type: 'support',
+    },
+  ] as const;
+  /**
+   * Toggle mobile accordion
+   */
   const toggleAccordion = (index: number) => {
-    setOpenItems((prev) => (prev.includes(index) ? prev.filter((item) => item !== index) : [...prev, index]));
+    setOpenItems((prev) =>
+      prev.includes(index)
+        ? prev.filter((item) => item !== index)
+        : [...prev, index]
+    );
+  };
+  const normalizeHref = (href: string) => {
+    if (!href) {
+      return '#';
+    }
+    // Keep anchors and special URLs unchanged
+    if (
+      href.startsWith('#') ||
+      href.startsWith('mailto:') ||
+      href.startsWith('tel:') ||
+      href.startsWith('http://') === false &&
+        href.startsWith('https://') === false
+    ) {
+      return href;
+    }
+    try {
+      const url = new URL(href);
+      if (
+        typeof window !== 'undefined' &&
+        url.hostname === window.location.hostname
+      ) {
+        return `${url.pathname}${url.search}${url.hash}`;
+      }
+      return href;
+    } catch {
+      return href;
+    }
+  };
+  const isActiveLink = (href: string) => {
+    if (!href || href === '#') {
+      return false;
+    }
+    const normalizedHref = normalizeHref(href);
+    // Do not mark external links as active
+    if (
+      normalizedHref.startsWith('http://') ||
+      normalizedHref.startsWith('https://') ||
+      normalizedHref.startsWith('mailto:') ||
+      normalizedHref.startsWith('tel:')
+    ) {
+      return false;
+    }
+    const cleanHref = normalizedHref.replace(/\/$/, '') || '/';
+    const cleanPathname = pathname.replace(/\/$/, '') || '/';
+    return (
+      cleanPathname === cleanHref ||
+      cleanPathname.startsWith(`${cleanHref}/`)
+    );
+  };
+  const isExternalLink = (href: string) => {
+    return (
+      href.startsWith('http://') ||
+      href.startsWith('https://') ||
+      href.startsWith('mailto:') ||
+      href.startsWith('tel:')
+    );
+  };
+  const renderMenuLink = (
+    link: { label: string; href: string },
+    mobile = false
+  ) => {
+    if (!link?.label) {
+      return null;
+    }
+    const href = normalizeHref(link.href || '#');
+    const active = isActiveLink(href);
+    const external = isExternalLink(href);
+    const className = mobile
+      ? `transition-colors duration-300 ${
+          active
+            ? 'text-white'
+            : 'text-white-blue hover:text-secondary'
+        }`
+      : `transition-colors duration-500 ${
+          active
+            ? 'text-white'
+            : 'text-white-blue hover:text-secondary'
+        }`;
+    if (external) {
+      return (
+        <a
+          href={href}
+          target={
+            href.startsWith('http://') || href.startsWith('https://')
+              ? '_blank'
+              : undefined
+          }
+          rel={
+            href.startsWith('http://') || href.startsWith('https://')
+              ? 'noopener noreferrer'
+              : undefined
+          }
+          className={className}
+        >
+          {link.label}
+        </a>
+      );
+    }
+    return (
+      <Link href={href} className={className}>
+        {link.label}
+      </Link>
+    );
   };
   return (
-    <footer className="bg-primary text-white-blue text-sm xl:pb-10">
+    <footer className="bg-primary text-white-blue text-sm">
       <Container>
-        <div className="pt-10 lg:pt-20">
+        <div className="space-pt">
           <div className="grid gap-8 lg:grid-cols-2 xl:grid-cols-[1.8fr_1fr_1fr_1fr] xl:gap-x-20">
             <div>
-              <h2 className="max-w-110 lg:max-w-99.75 text-4xl font-bold uppercase leading-none lg:text-[50px] text-center lg:text-left mx-auto lg:mx-0">
-                {footerData.newsletter.title}
-              </h2>
-              <p className="mt-7 lg:mt-12 text-sm uppercase mx-auto lg:mx-0 text-center lg:text-left">
-                {footerData.newsletter.description}
+              {/* <h2 className="mx-auto max-w-110 text-center text-4xl font-bold uppercase leading-none lg:mx-0 lg:max-w-99.75 lg:text-left lg:text-[50px]">
+                {newsletter.title}
+              </h2> */}
+                  <h2 className="relative z-10 mb-0  w-fit bg-primary pr-2 font-sans-flex text-7xl italic uppercase leading-none text-white/90 md:text-[120px] text-center lg:text-left mx-auto lg:mx-0">
+              {bottom.logo}
+            </h2>
+              <p className="mx-auto mt-2 text-center text-sm uppercase lg:mx-0 lg:mt-5 lg:text-left">
+                {newsletter.description}
               </p>
-              <div className="mt-4 flex lg:max-w-70 overflow-hidden rounded-full bg-white-blue/50">
+              <div className="mt-4 flex overflow-hidden rounded-full bg-white-blue/50 lg:max-w-70">
                 <input
                   type="email"
-                  placeholder={footerData.newsletter.placeholder}
-                  className="h-12 w-full bg-transparent px-5 text-secondary/50 outline-none placeholder:text-secondary/50"
+                  placeholder={newsletter.placeholder}
+                  className="h-12 w-full min-w-0 bg-transparent px-5 text-secondary/50 outline-none placeholder:text-secondary/50"
                 />
-                <button
+              <button
                   type="button"
                   className="m-1 rounded-full bg-white px-6 text-secondary transition-all duration-700 hover:bg-secondary hover:text-white">
-                  {footerData.newsletter.buttonText}
+                  {newsletter.buttonText}
                 </button>
               </div>
-              <p
-                className="mt-3 text-sm leading-tight text-white-blue  max-w-70 mx-auto lg:mx-0  text-center lg:text-left"
-                dangerouslySetInnerHTML={{ __html: footerData.newsletter.privacyText }}
-              />
+              {newsletter.privacyText && (
+                <p
+                  className="mx-auto mt-3 max-w-70 text-center text-sm leading-tight text-white-blue lg:mx-0 lg:text-left"
+                  dangerouslySetInnerHTML={{
+                    __html: newsletter.privacyText,
+                  }}
+                />
+              )}
             </div>
             <div className="hidden lg:block">
-              <h3 className="mb-5 text-[25px] font-bold uppercase">{footerData.contact.title}</h3>
+              <h3 className="mb-5 text-xl font-semibold uppercase">
+                {contact.title}
+              </h3>
               <div className="space-y-2">
-                <p>
-                  <a href={`tel:${footerData.contact.phone}`} className="hover:text-secondary transition-colors duration-500">
-                    {footerData.contact.phone}
-                  </a>
-                </p>
-                <p>
-                  <a href={`mailto:${footerData.contact.email}`} className="hover:text-secondary transition-colors duration-500">
-                    {footerData.contact.email}
-                  </a>
-                </p>
-                <p>{footerData.contact.address}</p>
+                {contact.phone && (
+                  <p>
+                    <a
+                      href={`tel:${contact.phone}`}
+                      className="transition-colors duration-500 hover:text-secondary"
+                    >
+                      {contact.phone}
+                    </a>
+                  </p>
+                )}
+                {contact.email && (
+                  <p>
+                    <a
+                      href={
+                        contact.email.startsWith('mailto:')
+                          ? contact.email
+                          : `mailto:${contact.email}`
+                      }
+                      className="transition-colors duration-500 hover:text-secondary"
+                    >
+                      {contact.email.replace('mailto:', '')}
+                    </a>
+                  </p>
+                )}
+                {contact.address && (
+                  <p>{contact.address}</p>
+                )}
               </div>
-              <div className="mt-6 border-t border-white/30 pt-6 w-fit">
-                {footerData.contact.hours.map((item) => (
-                  <div key={item.day} className="mb-2 flex items-center justify-between gap-3 gap-x-8">
-                    <span>{item.day}</span>
-                    <span>{item.time}</span>
-                  </div>
-                ))}
-              </div>
+              {contact.hours?.length > 0 && (
+                <div className="mt-6 w-fit border-t border-white/30 pt-6">
+                  {contact.hours.map((item, index) => (
+                    <div
+                      key={`${item.day}-${index}`}
+                      className="mb-2 flex items-center justify-between gap-3 gap-x-8"
+                    >
+                      <span>{item.day}</span>
+                      <span>{item.time}</span>
+                    </div>
+                  ))}
+                </div>
+              )}
             </div>
             <div className="hidden lg:block">
-              <h3 className="mb-5 text-[25px] font-bold uppercase">{footerData.services.title}</h3>
-              <ul className="space-y-2">
-                {footerData.services.links.map((link) => {
-                  const active = pathname === link.href || pathname.startsWith(`${link.href}/`);
-                  return (
-                    <li key={link.label}>
-                      <Link
-                        href={link.href}
-                        className={`transition-colors duration-500 ${active ? 'text-white' : 'text-white-blue hover:text-secondary'}`}>
-                        {link.label}
-                      </Link>
+              <h3 className="mb-5 text-xl font-semibold uppercase">
+                {services.title}
+              </h3>
+              {services.links?.length > 0 ? (
+                <ul className="space-y-2">
+                  {services.links.map((link) => (
+                    <li
+                      key={`${link.label}-${link.href}`}
+                    >
+                      {renderMenuLink(link)}
                     </li>
-                  );
-                })}
-              </ul>
+                  ))}
+                </ul>
+              ) : (
+                <p className="text-white-blue/60">
+                  No services available.
+                </p>
+              )}
             </div>
             <div className="hidden lg:flex lg:flex-col">
-              <h3 className="mb-5 text-[25px] font-bold uppercase">{footerData.support.title}</h3>
-              <ul className="space-y-2">
-                {footerData.support.links.map((link) => {
-                  const active = pathname === link.href || pathname.startsWith(`${link.href}/`);
-                  return (
-                    <li key={link.label}>
-                      <Link
-                        href={link.href}
-                        className={`transition-colors duration-500 ${active ? 'text-white' : 'text-white-blue hover:text-secondary'}`}>
-                        {link.label}
-                      </Link>
+              <h3 className="mb-5 text-xl font-semibold uppercase">
+                {support.title}
+              </h3>
+              {support.links?.length > 0 ? (
+                <ul className="space-y-2">
+                  {support.links.map((link) => (
+                    <li
+                      key={`${link.label}-${link.href}`}
+                    >
+                      {renderMenuLink(link)}
                     </li>
-                  );
-                })}
-              </ul>
-              <div className="mt-auto flex flex-wrap gap-3 pt-10">
-                {footerData.socials.map((social) => {
-                  const Icon = socialIcons[social.icon as keyof typeof socialIcons];
-                  return (
-                    <Link
-                      key={social.label}
-                      href={social.href}
-                      aria-label={social.label}
-                      className="flex h-10 w-10 items-center justify-center rounded-full text-primary bg-white/80 transition-all duration-300 hover:bg-white hover:text-secondary">
-                      <Icon className="h-5 w-5" />
-                    </Link>
-                  );
-                })}
-              </div>
+                  ))}
+                </ul>
+              ) : (
+                <p className="text-white-blue/60">
+                  No support links available.
+                </p>
+              )}
+              {/* Social Icons */}
+              {socials?.length > 0 && (
+                <div className="mt-auto flex flex-wrap gap-3 pt-10">
+                  {socials.map((social) => {
+                    const Icon =
+                      socialIcons[
+                        social.icon as keyof typeof socialIcons
+                      ];
+                    if (!Icon || !social.href) {
+                      return null;
+                    }
+                    const external = isExternalLink(
+                      social.href
+                    );
+                    return (
+                      <a
+                        key={`${social.label}-${social.href}`}
+                        href={social.href}
+                        aria-label={social.label}
+                        target={
+                          external &&
+                          (social.href.startsWith('http://') ||
+                            social.href.startsWith('https://'))
+                            ? '_blank'
+                            : undefined
+                        }
+                        rel={
+                          external &&
+                          (social.href.startsWith('http://') ||
+                            social.href.startsWith('https://'))
+                            ? 'noopener noreferrer'
+                            : undefined
+                        }
+                        className="flex h-10 w-10 items-center justify-center rounded-full bg-white/80 text-primary transition-all duration-300 hover:bg-white hover:text-secondary"
+                      >
+                        <Icon className="h-5 w-5" />
+                      </a>
+                    );
+                  })}
+                </div>
+              )}
             </div>
-            <div className="lg:hidden">
+            <div className="lg:hidden lg:col-span-3">
               {accordionItems.map((item, index) => {
                 const isOpen = openItems.includes(index);
                 return (
-                  <div key={item.title} className="border-b border-white/20">
-                    <button type="button" onClick={() => toggleAccordion(index)} className="flex w-full items-center justify-between py-5">
-                      <span className="text-xl font-semibold">{item.title}</span>
-                      <FaChevronDown className={`transition-transform duration-300 ${isOpen ? 'rotate-180' : ''}`} />
+                  <div
+                    key={`${item.type}-${item.title}`}
+                    className="border-b border-white/20"
+                  >
+                    <button
+                      type="button"
+                      onClick={() => toggleAccordion(index)}
+                      aria-expanded={isOpen}
+                      className="flex w-full items-center justify-between py-5 text-left"
+                    >
+                      <span className="text-xl font-semibold">
+                        {item.title}
+                      </span>
+                      <FaChevronDown
+                        className={`transition-transform duration-300 ${
+                          isOpen ? 'rotate-180' : ''
+                        }`}
+                      />
                     </button>
                     <div
                       className={`overflow-hidden transition-all duration-300 ${
-                        isOpen ? 'max-h-125 pb-5 opacity-100' : 'max-h-0 opacity-0'
-                      }`}>
+                        isOpen
+                          ? 'max-h-125 pb-5 opacity-100'
+                          : 'max-h-0 opacity-0'
+                      }`}
+                    >
                       {item.type === 'contact' && (
                         <>
                           <div className="space-y-2">
-                            <p>{footerData.contact.phone}</p>
-                            <p>{footerData.contact.email}</p>
-                            <p>{footerData.contact.address}</p>
+                            {contact.phone && (
+                              <p>
+                                <a
+                                  href={`tel:${contact.phone}`}
+                                  className="transition-colors duration-300 hover:text-secondary"
+                                >
+                                  {contact.phone}
+                                </a>
+                              </p>
+                            )}
+                            {contact.email && (
+                              <p>
+                                <a
+                                  href={
+                                    contact.email.startsWith(
+                                      'mailto:'
+                                    )
+                                      ? contact.email
+                                      : `mailto:${contact.email}`
+                                  }
+                                  className="transition-colors duration-300 hover:text-secondary"
+                                >
+                                  {contact.email.replace(
+                                    'mailto:',
+                                    ''
+                                  )}
+                                </a>
+                              </p>
+                            )}
+                            {contact.address && (
+                              <p>{contact.address}</p>
+                            )}
                           </div>
-                          <div className="mt-6">
-                            {footerData.contact.hours.map((hour) => (
-                              <div key={hour.day} className="mb-2 flex justify-between">
-                                <span>{hour.day}</span>
-                                <span>{hour.time}</span>
-                              </div>
-                            ))}
-                          </div>
+                          {contact.hours?.length > 0 && (
+                            <div className="mt-6">
+                              {contact.hours.map(
+                                (hour, hourIndex) => (
+                                  <div
+                                    key={`${hour.day}-${hourIndex}`}
+                                    className="mb-2 flex justify-between gap-4"
+                                  >
+                                    <span>{hour.day}</span>
+                                    <span>{hour.time}</span>
+                                  </div>
+                                )
+                              )}
+                            </div>
+                          )}
                         </>
                       )}
                       {item.type === 'services' && (
-                        <ul className="space-y-3">
-                          {footerData.services.links.map((link) => (
-                            <li key={link.label}>
-                              <Link href={link.href}>{link.label}</Link>
-                            </li>
-                          ))}
-                        </ul>
+                        <>
+                          {services.links?.length > 0 ? (
+                            <ul className="space-y-3">
+                              {services.links.map((link) => (
+                                <li
+                                  key={`${link.label}-${link.href}`}
+                                >
+                                  {renderMenuLink(link, true)}
+                                </li>
+                              ))}
+                            </ul>
+                          ) : (
+                            <p className="text-white-blue/60">
+                              No services available.
+                            </p>
+                          )}
+                        </>
                       )}
                       {item.type === 'support' && (
                         <>
-                          <ul className="space-y-3">
-                            {footerData.support.links.map((link) => (
-                              <li key={link.label}>
-                                <Link href={link.href}>{link.label}</Link>
-                              </li>
-                            ))}
-                          </ul>
-                          <div className="mt-6 flex flex-wrap gap-3">
-                            {footerData.socials.map((social) => {
-                              const Icon = socialIcons[social.icon as keyof typeof socialIcons];
-                              return (
-                                <Link
-                                  key={social.label}
-                                  href={social.href}
-                                  aria-label={social.label}
-                                  className="flex h-11 w-11 items-center justify-center rounded-full bg-white/20">
-                                  <Icon className="h-5 w-5" />
-                                </Link>
-                              );
-                            })}
-                          </div>
+                          {support.links?.length > 0 ? (
+                            <ul className="space-y-3">
+                              {support.links.map((link) => (
+                                <li
+                                  key={`${link.label}-${link.href}`}
+                                >
+                                  {renderMenuLink(link, true)}
+                                </li>
+                              ))}
+                            </ul>
+                          ) : (
+                            <p className="text-white-blue/60">
+                              No support links available.
+                            </p>
+                          )}
+                          {socials?.length > 0 && (
+                            <div className="mt-6 flex flex-wrap gap-3">
+                              {socials.map((social) => {
+                                const Icon =
+                                  socialIcons[
+                                    social.icon as keyof typeof socialIcons
+                                  ];
+                                if (
+                                  !Icon ||
+                                  !social.href
+                                ) {
+                                  return null;
+                                }
+                                const external =
+                                  isExternalLink(
+                                    social.href
+                                  );
+                                return (
+                                  <a
+                                    key={`${social.label}-${social.href}`}
+                                    href={social.href}
+                                    aria-label={social.label}
+                                    target={
+                                      external &&
+                                      (social.href.startsWith(
+                                        'http://'
+                                      ) ||
+                                        social.href.startsWith(
+                                          'https://'
+                                        ))
+                                        ? '_blank'
+                                        : undefined
+                                    }
+                                    rel={
+                                      external &&
+                                      (social.href.startsWith(
+                                        'http://'
+                                      ) ||
+                                        social.href.startsWith(
+                                          'https://'
+                                        ))
+                                        ? 'noopener noreferrer'
+                                        : undefined
+                                    }
+                                    className="flex h-11 w-11 items-center justify-center rounded-full bg-white/20 transition-colors duration-300 hover:bg-white/30"
+                                  >
+                                    <Icon className="h-5 w-5" />
+                                  </a>
+                                );
+                              })}
+                            </div>
+                          )}
                         </>
                       )}
                     </div>
@@ -310,16 +505,17 @@ export default function Footer() {
               })}
             </div>
           </div>
-          <div className="mt-12 lg:mt-20 overflow-hidden">
-            <h2 className="text-7xl font-adrianna italic uppercase leading-none text-white/90 md:text-[120px] xl:text-[150px] bg-primary w-fit -mb-7 md:-mb-10 relative z-10 pr-2">
-              {footerData.bottom.logo}
-            </h2>
-            <div className="mt-4 h-px w-full bg-white/20" />
-            <div className="flex flex-col gap-1 sm:gap-x-3 py-5 text-sm text-white/70 lg:flex-row lg:items-center sm:pl-60 md:pl-102 xl:pl-126">
-              <p className="flex items-center gap-3 text-center sm:text-left justify-center sm:justify-start">
-                {footerData.bottom.copyright} <Image src="/images/star.png" width={17} height={17} alt="star" className="shirnk-0" />
+          <div className="lg:mt-10 overflow-hidden">
+        
+            <div className="hidden lg:block h-px w-full bg-white/20" />
+            <div className="flex flex-col gap-1 py-5 text-sm text-white/70 sm:gap-x-3  lg:flex-row lg:items-center text-center justify-center lg:justify-between">
+              <p className="flex items-center justify-center gap-3 text-center sm:justify-start lg:text-left w-fit mx-auto lg:mx-0">
+                {bottom.copyright}
+             
               </p>
-              <p className="text-center sm:text-left">{footerData.bottom.credit}</p>
+              <p className="text-center lg:text-left">
+                {bottom.credit}
+              </p>
             </div>
           </div>
         </div>

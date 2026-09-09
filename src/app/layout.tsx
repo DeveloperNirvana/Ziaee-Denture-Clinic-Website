@@ -1,59 +1,36 @@
-import type { Metadata } from 'next';
-import Header from '@/components/header/Header';
-import Footer from '@/components/footer/Footer';
-import './globals.css';
-
+import type { Metadata } from "next";
+import { Google_Sans_Flex } from "next/font/google";
+import Header from "@/components/header/Header";
+import Footer from "@/components/footer/Footer";
+import "./globals.css";
+import { getHeaderData } from "@/data/header";
+import { getFooterData } from "@/data/footer";
+const googleSansFlex = Google_Sans_Flex({ variable: "--font-google-sans-flex",adjustFontFallback: false, subsets: ["latin"], display: "swap",   });
 export const metadata: Metadata = {
-  metadataBase: new URL('https://www.ziaeedentureclinic.ca'),
-  title: {
-    default: 'Ziaee Denture Clinic | Denture Care in Vancouver, BC',
-    template: '%s | Ziaee Denture Clinic'
-  },
+  title: 'Ziaee Denture',
   description:
-    'Modern denture care in Vancouver designed around comfort, clarity, and confidence. Complete, partial, and implant-supported dentures, relines, and repairs.',
-  alternates: {
-    canonical: './'
-  }
-};
-const localBusinessJsonLd = {
-  '@context': 'https://schema.org',
-  '@type': 'Dentist',
-  name: 'Ziaee Denture Clinic',
-  url: 'https://www.ziaeedentureclinic.ca',
-  telephone: '+1-604-326-0459',
-  email: 'info@ziaeedenture.ca',
-  address: {
-    '@type': 'PostalAddress',
-    streetAddress: '2677 Kingsway',
-    addressLocality: 'Vancouver',
-    addressRegion: 'BC',
-    addressCountry: 'CA'
-  },
-  openingHoursSpecification: [
-    {
-      '@type': 'OpeningHoursSpecification',
-      dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
-      opens: '09:00',
-      closes: '17:00'
-    }
-  ]
-};
+    'Ziaee Denture Modern denture care designed around comfort, clarity, and confidence.',
 
-export default function RootLayout({
-  children
+  metadataBase: new URL(
+    process.env.NEXT_PUBLIC_SITE_URL ||
+      'http://localhost:3000'
+  ),
+};
+export default async function RootLayout({
+  children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const [headerData, footerData] = await Promise.all([
+    getHeaderData(),
+    getFooterData(),
+  ]);
   return (
-    <html lang="en">
-      <body>
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessJsonLd) }}
-        />
-        <Header />
+    <html lang="en" data-scroll-behavior="smooth">
+      <body className={googleSansFlex.variable}>
+        <Header data={headerData} />
         {children}
-        <Footer />
+        <Footer data={footerData} />
       </body>
     </html>
   );

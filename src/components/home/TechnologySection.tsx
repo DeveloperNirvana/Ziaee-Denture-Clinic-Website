@@ -24,11 +24,11 @@ interface TechnologySectionProps {
 }
 export default function TechnologySection({ data }: TechnologySectionProps) {
   return (
-    <section className="pb-14 xl:py-24 text-secondary text-center lg:text-left">
+    <section className="space-pb text-secondary text-center lg:text-left">
       <Container>
         <div className="grid  gap-12 lg:grid-cols-2 lg:gap-20">
           <div className="lg:sticky lg:top-12 w-full shrink-0 self-start">
-            <Tagline title={data.tagline} className="mb-3 xl:mb-26" />
+            <Tagline title={data.tagline} className="mb-3" />
             <Heading className="text-white-blue" variant="xxl">
               <span className="text-primary font-bold">{data.title.highlight}</span>
               <span className="text-secondary"> {data.title.text}</span>

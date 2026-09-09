@@ -15,6 +15,7 @@ interface CareGuideCardProps {
   };
   index: number;
 }
+
 export default function CareGuideCard({ data, index }: CareGuideCardProps) {
   const number = index + 1;
   if (number === 1) {

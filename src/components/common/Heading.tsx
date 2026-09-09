@@ -10,10 +10,10 @@ const variants: Record<HeadingVariant, string> = {
   xs: 'text-xl',
   sm: 'text-2xl',
   md: 'text-2xl',
-  lg: 'text-3xl lg:text-[40px]',
-  xl: 'text-[33px] lg:text-[40px] xl:text-[46px]',
-  xxl: 'text-[33px] lg:text-[42px] xl:text-[50px] uppercase lg:leading-none xl:leading-none'
+  lg: 'text-3xl',
+  xl: 'text-4xl lg:text-[40px]',
+  xxl: 'text-4xl lg:text-[40px]  xl:text-[42px] uppercase'
 };
 export default function Heading({ as: Tag = 'h2', variant = 'lg', className = '', children }: HeadingProps) {
-  return <Tag className={`font-normal text- font-fabulous text-primary leading-tight ${variants[variant]} ${className}`}>{children}</Tag>;
+  return <Tag className={`font-normal font-sans-flex text-primary leading-[1.1]! ${variants[variant]} ${className}`}>{children}</Tag>;
 }

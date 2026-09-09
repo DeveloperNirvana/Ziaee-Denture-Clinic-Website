@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@plugin "@tailwindcss/typography";
 :root {
   --color-primary: #48BAB0;
   --color-secondary: #0A4239;
@@ -11,94 +12,28 @@
   --color-secondary: var(--color-secondary);
   --color-white-blue: var(--color-white-blue);
   --container-main: var(--container);
-  --container-main-lg: var(--container-lg);
-  --font-adrianna: "Adrianna Extended", sans-serif;
-  --font-helvetica: "Helvetica Neue", sans-serif;
+  --container-main-lg: var(--container-lg);  
+  /* --font-sans-flex: "Google Sans Flex", sans-serif; */
+  --font-sans-flex: var(--font-google-sans-flex);
 }
-@font-face {
-  font-family: 'Adrianna Extended';
-  src: url('/fonts/AdriannaExtended-Regular.woff2') format('woff2'),
-    url('/fonts/AdriannaExtended-Regular.woff') format('woff');
-  font-weight: normal;
-  font-style: normal;
-  font-display: swap;
+@utility font-sans-flex {
+  font-family: var(--font-sans-flex), sans-serif;
 }
-@font-face {
-  font-family: 'Helvetica Neue';
-  src: url('/fonts/HelveticaNeue.woff2') format('woff2'),
-    url('/fonts/HelveticaNeue.woff') format('woff');
-  font-weight: normal;
-  font-style: normal;
-  font-display: swap;
+@utility space-py {
+  @apply py-12 lg:py-20;
 }
-@font-face {
-  font-family: 'Helvetica Neue';
-  src: url('/fonts/HelveticaNeue-Bold.woff2') format('woff2'),
-    url('/fonts/HelveticaNeue-Bold.woff') format('woff');
-  font-weight: bold;
-  font-style: normal;
-  font-display: swap;
+@utility space-pt {
+  @apply pt-12 lg:pt-20;
 }
-@font-face {
-  font-family: 'Helvetica Neue';
-  src: url('/fonts/HelveticaNeue-CondensedBlack.woff2') format('woff2'),
-    url('/fonts/HelveticaNeue-CondensedBlack.woff') format('woff');
-  font-weight: 900;
-  font-style: normal;
-  font-display: swap;
-}
-@font-face {
-  font-family: 'Helvetica Neue';
-  src: url('/fonts/HelveticaNeue-BoldItalic.woff2') format('woff2'),
-    url('/fonts/HelveticaNeue-BoldItalic.woff') format('woff');
-  font-weight: bold;
-  font-style: italic;
-  font-display: swap;
-}
-@font-face {
-  font-family: 'Helvetica Neue';
-  src: url('/fonts/HelveticaNeue-Italic.woff2') format('woff2'),
-    url('/fonts/HelveticaNeue-Italic.woff') format('woff');
-  font-weight: normal;
-  font-style: italic;
-  font-display: swap;
-}
-@font-face {
-  font-family: 'Helvetica Neue';
-  src: url('/fonts/HelveticaNeue-Light.woff2') format('woff2'),
-    url('/fonts/HelveticaNeue-Light.woff') format('woff');
-  font-weight: 300;
-  font-style: normal;
-  font-display: swap;
-}
-@font-face {
-  font-family: 'Helvetica Neue';
-  src: url('/fonts/HelveticaNeue-LightItalic.woff2') format('woff2'),
-    url('/fonts/HelveticaNeue-LightItalic.woff') format('woff');
-  font-weight: 300;
-  font-style: italic;
-  font-display: swap;
-}
-@font-face {
-  font-family: 'Helvetica Neue';
-  src: url('/fonts/HelveticaNeue-Medium.woff2') format('woff2'),
-    url('/fonts/HelveticaNeue-Medium.woff') format('woff');
-  font-weight: 500;
-  font-style: normal;
-  font-display: swap;
-}
-@utility font-adrianna {
-  font-family: var(--font-adrianna), sans-serif;
-}
-@utility font-helvetica {
-  font-family: var(--font-helvetica), sans-serif;
+@utility space-pb {
+  @apply pb-12 lg:pb-20;
 }
 html {
   scroll-behavior: smooth;
 }
 body {
   overflow-x: hidden;
-  font-family: var(--font-helvetica), sans-serif;
+  font-family: var(--font-google-sans-flex), sans-serif;
   color: black;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
@@ -121,9 +56,18 @@ body {
   h4,
   h5,
   h6 {
-    @apply font-helvetica;
+    @apply font-sans-flex leading-tight;
   }
   button {
-    @apply cursor-pointer
+    @apply cursor-pointer;
   }
+
+  .cms-list li {
+  @apply relative pl-6 pb-2 last:pb-0;
+}
+
+.cms-list li::before {
+  @apply absolute left-0 top-[0.7em] size-2 -translate-y-1/2 rounded-full bg-[#a8acb3];
+  content: "";
+}
 }

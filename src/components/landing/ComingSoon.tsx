@@ -68,7 +68,7 @@ export default function ComingSoon({ data }: Props) {
                     duration: 1,
                     delay: 0.2
                   }}
-                  className="font-adrianna text-[25px] uppercase tracking-[0.06em] text-secondary whitespace-nowrap">
+                  className="font-sans-flex text-[25px] uppercase tracking-[0.06em] text-secondary whitespace-nowrap">
                   {data.logo.title}
                 </motion.h2>
                 <div className="flex items-center justify-center gap-3 overflow-hidden">
@@ -88,7 +88,7 @@ export default function ComingSoon({ data }: Props) {
                       duration: 0.6,
                       delay:  0.4
                     }}
-                    className="font-helvetica text-[17px] font-bold tracking-[0.3em] text-secondary">
+                    className="font-sans-flex text-[17px] font-bold tracking-[0.3em] text-secondary">
                     {data.logo.subtitle}
                   </motion.span>
                   <motion.span
