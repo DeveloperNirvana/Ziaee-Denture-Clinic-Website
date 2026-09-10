@@ -14,9 +14,7 @@ export default function ThankYouPage() {
         </h1>
 
         <p className="mx-auto mb-8 max-w-lg text-base leading-relaxed text-secondary/80 md:text-lg">
-          Thank you for contacting us. We have received your submission
-          successfully. Our team will review your message and get back to you
-          shortly.
+        Thank you for reaching out to Ziaee Denture Clinic. We’ve received your message. A member of our team will be in touch with you shortly.
         </p>
 
         <Link
