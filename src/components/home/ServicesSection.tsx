@@ -40,7 +40,8 @@ export default function ServicesSection({ data }: ServicesSectionProps) {
             <p className="max-w-130 leading-snug text-secondary mt-3 mx-auto lg:mx-0">{data.description}</p>
           </div>
         </div>
-        <div className="w-full mt-10">
+     </Container>
+        <div className="w-full mt-10 px-4">
           <Swipers
             className="overflow-visible!"
             slidesPerView={1.2}
@@ -57,6 +58,12 @@ export default function ServicesSection({ data }: ServicesSectionProps) {
               },
               1280: {
                 slidesPerView: 4
+              },
+              1586: {
+                slidesPerView: 5
+              },
+              1981: {
+                slidesPerView: 6
               }
             }}>
             {data.services.map((item) => (
@@ -64,6 +71,7 @@ export default function ServicesSection({ data }: ServicesSectionProps) {
             ))}
           </Swipers>
         </div>
+         <Container>
         <div className="mt-10 flex justify-center">
           <Button href={data.buttonLink} rounded="full" arrow arrowStyle="circle" className="pr-1">
             {data.buttonText}
