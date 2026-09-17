@@ -28,7 +28,7 @@ export default async function RootLayout({
   ]);
   return (
     <html lang="en" data-scroll-behavior="smooth">
-        <head>
+         <head>
         {/* Google Analytics */}
         <Script
           async
@@ -45,6 +45,7 @@ export default async function RootLayout({
             gtag('config', 'G-2QNSEVJYKB');
           `}
         </Script>
+      </head>
       <body className={googleSansFlex.variable}>
         <Header data={headerData} />
         {children}
