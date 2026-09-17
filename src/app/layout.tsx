@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import { Google_Sans_Flex } from "next/font/google";
-import Script from "next/script";
 import Header from "@/components/header/Header";
 import Footer from "@/components/footer/Footer";
 import "./globals.css";
@@ -28,25 +27,7 @@ export default async function RootLayout({
   ]);
   return (
     <html lang="en" data-scroll-behavior="smooth">
-         <head>
-        {/* Google Analytics */}
-        <Script
-          async
-          src="https://www.googletagmanager.com/gtag/js?id=G-2QNSEVJYKB"
-          strategy="beforeInteractive"
-        />
-
-        <Script id="google-analytics" strategy="beforeInteractive">
-          {`
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
-            gtag('js', new Date());
-
-            gtag('config', 'G-2QNSEVJYKB');
-          `}
-        </Script>
-      </head>
-      <body className={googleSansFlex.variable}>
+       <body className={googleSansFlex.variable}>
         <Header data={headerData} />
         {children}
         <Footer data={footerData} />
