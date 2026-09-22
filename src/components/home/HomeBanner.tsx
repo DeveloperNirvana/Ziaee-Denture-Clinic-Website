@@ -75,7 +75,7 @@ export default function HomeBanner({ data }: HomeBannerPropsType) {
     <section className="w-full bg-white-blue pt-5 lg:pt-0">
       <Container className="lg:max-w-[98%]!">
         <div className="grid overflow-hidden rounded-2xl lg:grid-cols-2 gap-3">
-          <div className="relative rounded-2xl overflow-hidden">
+          <div className="relative rounded-2xl overflow-hidden order-2 lg:order-1">
             <Image
               src={mainImage}
               alt={mainImageAlt}
@@ -106,7 +106,7 @@ export default function HomeBanner({ data }: HomeBannerPropsType) {
               </Link>
             </div>
           </div>
-          <div className="flex items-center justify-center bg-secondary px-6 py-10 md:py-16 text-center lg:px-16 overflow-hidden rounded-2xl">
+          <div className="flex items-center justify-center bg-secondary order-1 lg:order-2 px-6 py-10 md:py-16 text-center lg:px-16 overflow-hidden rounded-2xl">
             <div className="w-full max-w-130">
               <Swiper
                 modules={[Autoplay, Pagination]}

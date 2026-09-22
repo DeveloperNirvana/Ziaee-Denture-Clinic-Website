@@ -14,7 +14,7 @@ const needSections: ImageContentSectionData = {
   imageAlt: 'Partial Dentures',
   imagePosition: 'right',
   button: {
-    label: 'Request an Assessment',
+    label: 'Book a free consultation',
     href: '/contact-us'
   }
 };

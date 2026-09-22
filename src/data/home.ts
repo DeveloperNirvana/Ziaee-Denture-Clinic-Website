@@ -161,7 +161,7 @@ export const homeBannerData = {
   description:
     "Ziaee Denture Clinic provides personalized denture care in a calm, modern setting. From new dentures to adjustments, relines, and repairs, we help patients feel comfortable, informed, and confident at every step.",
 
-  buttonText: "Request an Assessment",
+  buttonText: "Book a Free Consultation",
   buttonHref: "/contact-us",
 
   mainImage: "/images/banner.jpg",
