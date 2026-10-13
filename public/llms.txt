@@ -1,0 +1,40 @@
+# Ziaee Denture Clinic
+
+> Ziaee Denture Clinic provides denture care at 2677 Kingsway in Vancouver, British Columbia, Canada. Services include complete, partial and implant-supported dentures, digital dentures, relines, rebases, repairs, adjustments, night guards and sports mouthguards.
+
+Website: https://www.ziaeedentureclinic.ca/. Telephone: 604-326-0459. Content reviewed on 2026-10-13.
+
+The website identifies Mohammad Kabir Ziaee as its owner and licensed denturist. It lists English, Farsi, Pashto, Hindi, Punjabi and Urdu for the clinician. Consultation availability, treatment suitability, fees and coverage are confirmed with the clinic. The clinic states that it welcomes eligible Canadian Dental Care Plan patients.
+
+The linked Markdown files summarize public website content. Each identifies its source HTML page and review date. They do not contain patient records. This file describes content; crawler access is managed separately through robots.txt and the hosting configuration.
+
+## Clinic and contact
+
+- [Ziaee Denture Clinic](https://www.ziaeedentureclinic.ca/index.md): Denture care at 2677 Kingsway in Vancouver, British Columbia, with complete, partial and implant-supported dentures and ongoing denture maintenance services.
+- [About Ziaee Denture Clinic](https://www.ziaeedentureclinic.ca/about-us/index.md): The clinic's approach to denture care and its owner and licensed denturist, Mohammad Kabir Ziaee.
+- [Contact and Consultation Requests](https://www.ziaeedentureclinic.ca/contact-us/index.md): Clinic address, telephone and consultation enquiry form for Ziaee Denture Clinic in Vancouver.
+- [New Patient Information](https://www.ziaeedentureclinic.ca/new-patients/index.md): Initial appointment enquiries and the clinic's new-patient form pathway.
+
+## Denture services
+
+- [Denture Services](https://www.ziaeedentureclinic.ca/services/index.md): An overview of the clinic's ten denture and dental-appliance service categories.
+- [Complete Dentures](https://www.ziaeedentureclinic.ca/services/complete-dentures/index.md): Custom complete dentures to replace a full upper or lower arch of missing teeth.
+- [Partial Dentures](https://www.ziaeedentureclinic.ca/services/partial-dentures/index.md): Custom removable partial dentures for people who have missing teeth and retain some natural teeth.
+- [Implant-Supported Dentures](https://www.ziaeedentureclinic.ca/services/implant-supported-dentures/index.md): Custom dentures that attach to implants, with the denture pathway coordinated with dental surgeons.
+- [Denture Relines](https://www.ziaeedentureclinic.ca/services/relines/index.md): Assessment and adjustment of the fitting surface of an existing denture, with hard and soft reline options described.
+- [Denture Rebase](https://www.ziaeedentureclinic.ca/services/rebase/index.md): Replacement of an existing denture's base while retaining its teeth when the appliance is suitable for rebasing.
+- [Denture Repairs](https://www.ziaeedentureclinic.ca/services/denture-repairs/index.md): Professional repair enquiries for damaged denture bases, teeth and clasps, including additions to suitable partial dentures.
+- [Denture Adjustments](https://www.ziaeedentureclinic.ca/services/adjustments/index.md): Assessment and adjustment of pressure points, bite and appliance fit for denture comfort.
+- [Custom Night Guards](https://www.ziaeedentureclinic.ca/services/night-guards/index.md): Custom-fitted night guard appliances, with design and fit assessed by the clinic.
+- [Custom Sports Mouthguards](https://www.ziaeedentureclinic.ca/services/sports-mouthguard/index.md): Custom-fitted sports mouthguards for youth and adult athletes.
+- [Digital Dentures](https://www.ziaeedentureclinic.ca/services/digital-dentures/index.md): Dentures designed using digital scanning and computerized design, with manufacturing methods described on the clinic's service page.
+
+## Coverage
+
+- [Canadian Dental Care Plan Information](https://www.ziaeedentureclinic.ca/cdcp-coverage/index.md): The clinic's participation information and support for eligible Canadian Dental Care Plan patients.
+
+## Optional
+
+- [Expanded clinic information](https://www.ziaeedentureclinic.ca/llms-full.txt): A self-contained collection of the reviewed page summaries.
+- [Denture care guides](https://www.ziaeedentureclinic.ca/blog/index.md): Summary of the live article index.
+- [Website sitemap](https://www.ziaeedentureclinic.ca/sitemap.xml): Existing sitemap of HTML content.
