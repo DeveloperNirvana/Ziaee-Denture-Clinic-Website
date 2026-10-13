@@ -29,21 +29,7 @@ export default async function RootLayout({
   return (
     <html lang="en" data-scroll-behavior="smooth">
        <body className={googleSansFlex.variable}>
-          <Script
-          src="https://www.googletagmanager.com/gtag/js?id=G-2QNSEVJYKB"
-          strategy="beforeInteractive"
-        />
-
-        <Script id="google-analytics" strategy="beforeInteractive">
-          {`
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
-            gtag('js', new Date());
-            gtag('config', 'G-2QNSEVJYKB');
-          `}
-        </Script>
-
-        <Header data={headerData} />
+      <Header data={headerData} />
         {children}
         <Footer data={footerData} />
       </body>
