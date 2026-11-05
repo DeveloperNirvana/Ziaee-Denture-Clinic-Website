@@ -36,6 +36,7 @@ export async function generateMetadata({
     };
   }
 
+  
   return {
     ...MetaData(blog.seo, {
       title: `${blog.title} | Ziaee Denture Clinic`,
