@@ -9,7 +9,7 @@ const className =
 const appointmentData = {
   backgroundImage: '/images/request-an-assessment.jpg',
   tag: '{ APPOINTMENT REQUEST }',
-  title: 'Request an assessment',
+  title: 'Book a free consultation',
   description: 'Send us a quick message and we’ll contact you about appointment availability, denture services, or CDCP coverage.',
   fields: {
     fullName: {

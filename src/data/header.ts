@@ -62,7 +62,7 @@ type HeaderDataType = {
 };
 const staticHeaderData: HeaderDataType = {
   phone: "(604) 326-0459",
-  email: "info@ziaeedenture.ca",
+  email: "info@ziaeedentureclinic.ca",
   address: "2677 Kingsway, Vancouver, BC",
   logo: {
     sourceUrl: "/images/logo.svg",

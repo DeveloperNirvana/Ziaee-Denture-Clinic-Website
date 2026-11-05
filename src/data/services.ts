@@ -14,7 +14,7 @@ export const servicesBanner: InnerBannerData = {
 
   buttons: [
     {
-      label: 'Request an Assessment',
+      label: 'Book a free consultation',
       href: '/contact-us',
       color: 'white',
     },
@@ -55,7 +55,7 @@ export const serviceCta = {
 
   buttons: [
     {
-      label: 'Request an Assessment',
+      label: 'Book a free consultation',
       href: '/contact-us',
       color: 'white',
     },

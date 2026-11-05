@@ -1,4 +1,6 @@
+import { Metadata } from "next";
 import { notFound } from "next/navigation";
+import { MetaData } from "@/lib/metadata";
 import {
   getSingleBlog,
   getRelatedBlogs,
@@ -9,7 +11,28 @@ interface Props {
     slug: string;
   }>;
 }
+export async function generateMetadata({
+  params,
+}: Props): Promise<Metadata> {
+  const { slug } = await params;
 
+  const blog = await getSingleBlog(slug);
+
+  if (!blog) {
+    return MetaData(null, {
+      title: "Blog | Ziaee Denture Clinic",
+      description:
+        "Read the latest dental and denture care articles from Ziaee Denture Clinic.",
+    });
+  }
+
+  return MetaData(blog.seo, {
+    title: `${blog.title} | Ziaee Denture Clinic`,
+    description:
+      blog.excerpt ||
+      "Read the latest dental and denture care articles from Ziaee Denture Clinic.",
+  });
+}
 export default async function Page({
   params,
 }: Props) {

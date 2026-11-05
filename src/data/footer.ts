@@ -13,7 +13,7 @@ export const staticFooterData = {
   contact: {
     title: 'CONTACT',
     phone: '604-326-0459',
-    email: 'info@ziaeedenture.ca',
+    email: 'info@ziaeedentureclinic.ca',
     address: '2677 Kingsway, Vancouver, BC',
 
     hours: [

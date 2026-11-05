@@ -17,8 +17,8 @@ interface FooterProps {
   data?: FooterData;
 }
 const socialIcons = {
-  instagram: FaInstagram,
-  facebook: FaFacebookF,
+  // instagram: FaInstagram,
+  // facebook: FaFacebookF,
   linkedin: FaLinkedinIn,
   location: IoLocationSharp,
 };

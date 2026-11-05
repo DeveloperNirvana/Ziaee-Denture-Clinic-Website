@@ -11,7 +11,7 @@ export const contactData = {
       "If you have questions, concerns, or would like to schedule an appointment, you can call us at (604) 326-0459. You can also email us at info@ziaeedenture.ca or fill out the form below. We at Ziaee Denture Clinic value our client's opinions.",
     address: '2677 Kingsway, Vancouver, BC',
     phone: '(604) 326-0459',
-    email: 'info@ziaeedenture.ca'
+    email: 'info@ziaeedentureclinic.ca'
   },
   formTextData: {
     tagline: '{ APPOINTMENT REQUEST }',

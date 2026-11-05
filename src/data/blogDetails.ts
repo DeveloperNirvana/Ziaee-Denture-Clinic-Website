@@ -1,5 +1,17 @@
 import { fetchGraphQL } from "@/lib/graphql";
 import type { InnerBannerData } from '@/components/common/InnerBanner';
+export interface YoastSEO {
+  title?: string | null;
+  metaDesc?: string | null;
+  canonical?: string | null;
+  opengraphTitle?: string | null;
+  opengraphDescription?: string | null;
+  opengraphImage?: {
+    sourceUrl?: string | null;
+  } | null;
+  twitterTitle?: string | null;
+  twitterDescription?: string | null;
+}
 export const blogBannerDetail: InnerBannerData = {
   title: 'WHAT TO EXPECT AT YOUR FIRST DENTURE APPOINTMENT',
   description:
@@ -248,15 +260,26 @@ export async function getRelatedBlogs(
 
 const GET_SINGLE_BLOG = `
 query GetSingleBlog($slug: ID!) {
-
   post(id: $slug, idType: SLUG) {
-
     databaseId
     title
     slug
     content
     excerpt
     date
+
+    seo {
+      title
+      metaDesc
+      canonical
+      opengraphTitle
+      opengraphDescription
+      opengraphImage {
+        sourceUrl
+      }
+      twitterTitle
+      twitterDescription
+    }
 
     featuredImage {
       node {
@@ -272,19 +295,12 @@ query GetSingleBlog($slug: ID!) {
     }
 
     blogDetails {
-
       blogSections {
-
         addTitle
-
         addContent
-
       }
-
     }
-
   }
-
 }
 `;
 
@@ -434,7 +450,8 @@ const tableOfContents =
 
 
     tableOfContents,
-
+  // Add this property
+  seo: post.seo ?? null,
 
   };
 

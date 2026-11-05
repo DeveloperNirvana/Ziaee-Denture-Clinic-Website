@@ -23,13 +23,14 @@ export default function CareGuideCard({ data, index }: CareGuideCardProps) {
       <Link
         href={data.link}
         className="relative h-full overflow-hidden rounded-[20px] bg-white-blue  grid md:grid-cols-[1fr_380px] lg:col-span-12 min-h-95 group">
+          <span className='hidden md:block bg-linear-to-r from-black to-transparent absolute inset-0 z-1 right-1/3 opacity-0 group-hover:opacity-100 duration-300'></span>
         <div>
-          <div className="max-w-175 relative z-10 p-5 lg:p-8 ">
+          <div className="max-w-190 relative z-10 p-5 md:pb-22 lg:p-8 lg:pb-30">
             <p className="mb-1 text-[10px] uppercase text-secondary duration-500 group-hover:text-white-blue">{`{${data.tagline}}`}</p>
             <h3 className="text-2xl sm:text-3xl font-bold uppercase leading-none duration-500 text-secondary xl:text-[40px] group-hover:text-white-blue">
               {data.title}
             </h3>
-            <p className="mt-5 max-w-137.5 text-base leading-snug text-secondary group-hover:text-white-blue duration-500">
+            <p className="mt-5 max-w-160 text-base leading-snug text-secondary group-hover:text-white-blue duration-500">
               {data.description}
             </p>
             <p className="mt-3 text-sm text-secondary/15">

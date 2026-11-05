@@ -58,7 +58,7 @@ export default async function Home() {
       <TechnologySection data={pageData.technology} />
       <ProcessSection data={pageData.process} />
       <Appointment />
-      <CareGuides data={pageData.careGuides} />
+      
        {faqs.length > 0 && (
         <CommonQuestions faqs={faqs} />
       )}
