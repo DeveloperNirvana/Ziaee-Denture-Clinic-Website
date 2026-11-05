@@ -25,7 +25,7 @@ export async function generateMetadata({
         "Read the latest dental and denture care articles from Ziaee Denture Clinic.",
     });
   }
-
+ 
   return MetaData(blog.seo, {
     title: `${blog.title} | Ziaee Denture Clinic`,
     description:
