@@ -338,6 +338,148 @@ export default async function RootLayout({
     }}
   />
 )}
+{slug === "new-patients" && (
+  <script
+    type="application/ld+json"
+    dangerouslySetInnerHTML={{
+      __html: JSON.stringify({
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "MedicalClinic",
+            "@id": "https://www.ziaeedentureclinic.ca/#clinic",
+            "name": "Ziaee Denture Clinic",
+            "url": "https://www.ziaeedentureclinic.ca/",
+            "telephone": "+1-604-326-0459",
+            "description":
+              "Denture clinic in Vancouver providing complete, partial and implant-supported dentures, maintenance services and custom dental appliances.",
+            "address": {
+              "@type": "PostalAddress",
+              "streetAddress": "2677 Kingsway",
+              "addressLocality": "Vancouver",
+              "addressRegion": "BC",
+              "addressCountry": "CA"
+            },
+            "areaServed": {
+              "@type": "City",
+              "name": "Vancouver"
+            },
+            "openingHoursSpecification": [
+              {
+                "@type": "OpeningHoursSpecification",
+                "dayOfWeek": [
+                  "https://schema.org/Monday",
+                  "https://schema.org/Tuesday",
+                  "https://schema.org/Wednesday",
+                  "https://schema.org/Thursday",
+                  "https://schema.org/Friday"
+                ],
+                "opens": "09:00",
+                "closes": "17:00"
+              }
+            ]
+          },
+          {
+            "@type": "WebSite",
+            "@id": "https://www.ziaeedentureclinic.ca/#website",
+            "url": "https://www.ziaeedentureclinic.ca/",
+            "name": "Ziaee Denture Clinic",
+            "publisher": {
+              "@id": "https://www.ziaeedentureclinic.ca/#clinic"
+            },
+            "inLanguage": "en-CA"
+          },
+          {
+            "@type": "WebPage",
+            "@id": "https://www.ziaeedentureclinic.ca/new-patients#webpage",
+            "url": "https://www.ziaeedentureclinic.ca/new-patients",
+            "name": "New Patient Information",
+            "description":
+              "Initial appointment enquiries and the clinic's new-patient form pathway.",
+            "inLanguage": "en-CA",
+            "isPartOf": {
+              "@id": "https://www.ziaeedentureclinic.ca/#website"
+            },
+            "about": {
+              "@id": "https://www.ziaeedentureclinic.ca/#clinic"
+            }
+          }
+        ]
+      }).replace(/</g, "\\u003c")
+    }}
+  />
+)}
+{slug === "contact-us" && (
+  <script
+    type="application/ld+json"
+    dangerouslySetInnerHTML={{
+      __html: JSON.stringify({
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "MedicalClinic",
+            "@id": "https://www.ziaeedentureclinic.ca/#clinic",
+            "name": "Ziaee Denture Clinic",
+            "url": "https://www.ziaeedentureclinic.ca/",
+            "telephone": "+1-604-326-0459",
+            "description":
+              "Denture clinic in Vancouver providing complete, partial and implant-supported dentures, maintenance services and custom dental appliances.",
+            "address": {
+              "@type": "PostalAddress",
+              "streetAddress": "2677 Kingsway",
+              "addressLocality": "Vancouver",
+              "addressRegion": "BC",
+              "addressCountry": "CA"
+            },
+            "areaServed": {
+              "@type": "City",
+              "name": "Vancouver"
+            },
+            "openingHoursSpecification": [
+              {
+                "@type": "OpeningHoursSpecification",
+                "dayOfWeek": [
+                  "https://schema.org/Monday",
+                  "https://schema.org/Tuesday",
+                  "https://schema.org/Wednesday",
+                  "https://schema.org/Thursday",
+                  "https://schema.org/Friday"
+                ],
+                "opens": "09:00",
+                "closes": "17:00"
+              }
+            ]
+          },
+          {
+            "@type": "WebSite",
+            "@id": "https://www.ziaeedentureclinic.ca/#website",
+            "url": "https://www.ziaeedentureclinic.ca/",
+            "name": "Ziaee Denture Clinic",
+            "publisher": {
+              "@id": "https://www.ziaeedentureclinic.ca/#clinic"
+            },
+            "inLanguage": "en-CA"
+          },
+          {
+            "@type": "ContactPage",
+            "@id": "https://www.ziaeedentureclinic.ca/contact-us#webpage",
+            "url": "https://www.ziaeedentureclinic.ca/contact-us",
+            "name": "Contact and Consultation Requests",
+            "description":
+              "Clinic address, telephone and consultation enquiry form for Ziaee Denture Clinic in Vancouver.",
+            "inLanguage": "en-CA",
+            "isPartOf": {
+              "@id": "https://www.ziaeedentureclinic.ca/#website"
+            },
+            "about": {
+              "@id": "https://www.ziaeedentureclinic.ca/#clinic"
+            }
+          }
+        ]
+      }).replace(/</g, "\\u003c")
+    }}
+  />
+)}
       </head>
 
       <body className={googleSansFlex.variable}>
